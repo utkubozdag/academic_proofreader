@@ -7,16 +7,16 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Project Setup & Environment' (Protocol in workflow.md)
 
 ## Phase 2: Word File Processing
-- [ ] Task: Implement Word file reader utility using `python-docx`
-    - [ ] Write tests for reading text from paragraphs
-    - [ ] Implement text extraction logic
-- [ ] Task: Implement Word file writer utility for creating a copy
-    - [ ] Write tests for saving a new document
-    - [ ] Implement file save logic
-- [ ] Task: Implement basic comment injection logic
-    - [ ] Write tests for adding a comment to a specific paragraph/run
-    - [ ] Implement comment injection using `python-docx`
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Word File Processing' (Protocol in workflow.md)
+- [x] Task: Implement Word file reader utility using `python-docx` [738532b]
+    - [x] Write tests for reading text from paragraphs
+    - [x] Implement text extraction logic
+- [x] Task: Implement Word file writer utility for creating a copy [738532b]
+    - [x] Write tests for saving a new document
+    - [x] Implement file save logic
+- [x] Task: Implement basic comment injection logic [738532b]
+    - [x] Write tests for adding a comment to a specific paragraph/run
+    - [x] Implement comment injection using `python-docx`
+- [~] Task: Conductor - User Manual Verification 'Phase 2: Word File Processing' (Protocol in workflow.md)
 
 ## Phase 3: Gemini Pro Integration
 - [ ] Task: Set up Gemini Pro client and basic connectivity tests
