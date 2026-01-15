@@ -36,7 +36,6 @@ def orchestrate(input_path, output_path, api_key):
     
     # 5. Inject comments
     # Simple mapping: find paragraph index by matching text
-    # In a real app, this might need more robust matching (e.g., fuzzy or context-aware)
     for issue in issues:
         original = issue.get("original")
         comment_text = f"Suggested: {issue.get('replacement')}\n\n{issue.get('explanation')}"
@@ -44,7 +43,7 @@ def orchestrate(input_path, output_path, api_key):
         # Find the paragraph
         for i, para in enumerate(processor.doc.paragraphs):
             if original in para.text:
-                processor.add_comment(i, comment_text, author="Academic Proofreader")
+                processor.add_comment(i, comment_text, author="Academic Proofreader", search_text=original)
                 break
     
     # 6. Save document

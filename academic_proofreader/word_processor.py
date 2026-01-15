@@ -36,15 +36,16 @@ class WordProcessor:
         """
         self.doc.save(output_path)
 
-    def add_comment(self, para_index, comment_text, author="Academic Proofreader", initials="AP"):
+    def add_comment(self, para_index, comment_text, author="Academic Proofreader", initials="AP", search_text=None):
         """
-        Add a comment to a specific paragraph.
+        Add a comment to a specific paragraph, optionally targeting a phrase.
         
         Args:
             para_index (int): Index of the paragraph to comment on.
             comment_text (str): The text of the comment.
             author (str, optional): Author of the comment. Defaults to "Academic Proofreader".
             initials (str, optional): Initials of the author. Defaults to "AP".
+            search_text (str, optional): Specific text within the paragraph to target.
         """
         if para_index >= len(self.doc.paragraphs):
             return
@@ -98,22 +99,35 @@ class WordProcessor:
         comments_xml.append(comment)
         
         # 4. Reference the comment in the paragraph
-        # We wrap the whole paragraph in the comment range
         start = OxmlElement('w:commentRangeStart')
         start.set(qn('w:id'), new_id)
         end = OxmlElement('w:commentRangeEnd')
         end.set(qn('w:id'), new_id)
         
-        # Insert start at the beginning of the paragraph
-        paragraph._p.insert(0, start)
-        # Insert end at the end of the paragraph
-        paragraph._p.append(end)
+        # Target specific text if provided and found
+        targeted = False
+        if search_text:
+            for run in paragraph.runs:
+                if search_text in run.text:
+                    run._r.addprevious(start)
+                    run._r.addnext(end)
+                    
+                    ref_run = paragraph.add_run()
+                    ref = OxmlElement('w:commentReference')
+                    ref.set(qn('w:id'), new_id)
+                    end.addnext(ref_run._r)
+                    ref_run._r.append(ref)
+                    targeted = True
+                    break
         
-        # Add comment reference
-        ref_run = paragraph.add_run()
-        ref = OxmlElement('w:commentReference')
-        ref.set(qn('w:id'), new_id)
-        ref_run._r.append(ref)
+        if not targeted:
+            # Fallback to wrapping the whole paragraph
+            paragraph._p.insert(0, start)
+            paragraph._p.append(end)
+            ref_run = paragraph.add_run()
+            ref = OxmlElement('w:commentReference')
+            ref.set(qn('w:id'), new_id)
+            ref_run._r.append(ref)
         
         # Update the comments part blob
         comments_part._blob = etree.tostring(comments_xml)
