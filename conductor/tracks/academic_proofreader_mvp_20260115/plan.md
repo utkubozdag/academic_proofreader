@@ -20,11 +20,11 @@
 
 ## Phase 3: Gemini Pro Integration
 - [x] Task: Set up Gemini Pro client and basic connectivity tests [affa88a]
-- [~] Task: Design and implement the proofreading prompt for academic feedback
-    - [~] Write tests for prompt generation
-    - [ ] Implement prompt logic incorporating academic guidelines
+- [x] Task: Design and implement the proofreading prompt for academic feedback [89d3e69]
+    - [x] Write tests for prompt generation
+    - [x] Implement prompt logic incorporating academic guidelines
 - [ ] Task: Implement logic to parse Gemini Pro response into structured feedback
-    - [ ] Write tests for parsing various response formats
+    - [~] Write tests for parsing various response formats
     - [ ] Implement robust parsing logic
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Gemini Pro Integration' (Protocol in workflow.md)
 
