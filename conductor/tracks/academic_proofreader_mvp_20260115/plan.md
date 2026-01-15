@@ -19,9 +19,9 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Word File Processing' (Protocol in workflow.md)
 
 ## Phase 3: Gemini Pro Integration
-- [~] Task: Set up Gemini Pro client and basic connectivity tests
-- [ ] Task: Design and implement the proofreading prompt for academic feedback
-    - [ ] Write tests for prompt generation
+- [x] Task: Set up Gemini Pro client and basic connectivity tests [affa88a]
+- [~] Task: Design and implement the proofreading prompt for academic feedback
+    - [~] Write tests for prompt generation
     - [ ] Implement prompt logic incorporating academic guidelines
 - [ ] Task: Implement logic to parse Gemini Pro response into structured feedback
     - [ ] Write tests for parsing various response formats
