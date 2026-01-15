@@ -30,12 +30,10 @@
 
 ## Phase 4: Core Logic & Report Generation
 - [x] Task: Orchestrate the proofreading flow (Read -> Analyze -> Comment -> Write) [17eb62e]
-- [ ] Task: Implement summary report generation logic
-    - [~] Write tests for report data aggregation
-    - [ ] Implement Markdown/Word report generation
-    - [ ] Write tests for report data aggregation
-    - [ ] Implement Markdown/Word report generation
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Core Logic & Report Generation' (Protocol in workflow.md)
+- [x] Task: Implement summary report generation logic [dc3571c]
+    - [x] Write tests for report data aggregation
+    - [x] Implement Markdown/Word report generation
+- [~] Task: Conductor - User Manual Verification 'Phase 4: Core Logic & Report Generation' (Protocol in workflow.md)
 
 ## Phase 5: CLI Interface & Final Integration
 - [ ] Task: Implement CLI using `argparse` or `click`
