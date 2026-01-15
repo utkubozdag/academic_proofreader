@@ -1,7 +1,7 @@
 # Implementation Plan: Core Academic Proofreader CLI
 
 ## Phase 1: Project Setup & Environment
-- [ ] Task: Initialize Python project structure (setup.py/pyproject.toml, requirements.txt)
+- [x] Task: Initialize Python project structure (setup.py/pyproject.toml, requirements.txt) [014f333]
 - [ ] Task: Set up environment variable management (.env, .gitignore)
 - [ ] Task: Configure basic logging and error handling
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Project Setup & Environment' (Protocol in workflow.md)
