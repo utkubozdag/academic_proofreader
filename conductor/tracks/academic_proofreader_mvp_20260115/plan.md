@@ -6,7 +6,7 @@
 - [x] Task: Configure basic logging and error handling [84d79de]
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Project Setup & Environment' (Protocol in workflow.md)
 
-## Phase 2: Word File Processing
+## Phase 2: Word File Processing [checkpoint: 5c5258e]
 - [x] Task: Implement Word file reader utility using `python-docx` [738532b]
     - [x] Write tests for reading text from paragraphs
     - [x] Implement text extraction logic
@@ -16,10 +16,10 @@
 - [x] Task: Implement basic comment injection logic [738532b]
     - [x] Write tests for adding a comment to a specific paragraph/run
     - [x] Implement comment injection using `python-docx`
-- [~] Task: Conductor - User Manual Verification 'Phase 2: Word File Processing' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Word File Processing' (Protocol in workflow.md)
 
 ## Phase 3: Gemini Pro Integration
-- [ ] Task: Set up Gemini Pro client and basic connectivity tests
+- [~] Task: Set up Gemini Pro client and basic connectivity tests
 - [ ] Task: Design and implement the proofreading prompt for academic feedback
     - [ ] Write tests for prompt generation
     - [ ] Implement prompt logic incorporating academic guidelines
