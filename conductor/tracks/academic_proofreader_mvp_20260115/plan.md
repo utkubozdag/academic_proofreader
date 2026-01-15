@@ -29,8 +29,10 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Gemini Pro Integration' (Protocol in workflow.md)
 
 ## Phase 4: Core Logic & Report Generation
-- [~] Task: Orchestrate the proofreading flow (Read -> Analyze -> Comment -> Write)
+- [x] Task: Orchestrate the proofreading flow (Read -> Analyze -> Comment -> Write) [17eb62e]
 - [ ] Task: Implement summary report generation logic
+    - [~] Write tests for report data aggregation
+    - [ ] Implement Markdown/Word report generation
     - [ ] Write tests for report data aggregation
     - [ ] Implement Markdown/Word report generation
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: Core Logic & Report Generation' (Protocol in workflow.md)
