@@ -36,8 +36,8 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 4: Core Logic & Report Generation' (Protocol in workflow.md)
 
 ## Phase 5: CLI Interface & Final Integration
-- [~] Task: Implement CLI using `argparse` or `click`
-    - [~] Write tests for CLI arguments
-    - [ ] Implement CLI entry point
-- [ ] Task: Final end-to-end integration testing with a sample academic paper
+- [x] Task: Implement CLI using `argparse` or `click` [36d569a]
+    - [x] Write tests for CLI arguments
+    - [x] Implement CLI entry point
+- [~] Task: Final end-to-end integration testing with a sample academic paper
 - [ ] Task: Conductor - User Manual Verification 'Phase 5: CLI Interface & Final Integration' (Protocol in workflow.md)
