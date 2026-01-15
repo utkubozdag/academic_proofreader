@@ -1,15 +1,15 @@
 import google.generativeai as genai
 
 class GeminiClient:
-    """Wrapper for interacting with the Google Gemini Pro model."""
+    """Wrapper for interacting with the Google Gemini model."""
     
-    def __init__(self, api_key, model_name="gemini-pro"):
+    def __init__(self, api_key, model_name="gemini-2.0-flash"):
         """
         Initialize the GeminiClient.
         
         Args:
             api_key (str): Google AI API key.
-            model_name (str, optional): Name of the model to use. Defaults to "gemini-pro".
+            model_name (str, optional): Name of the model to use. Defaults to "gemini-2.0-flash".
         """
         genai.configure(api_key=api_key)
         self.model = genai.GenerativeModel(model_name=model_name)

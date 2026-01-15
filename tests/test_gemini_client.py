@@ -9,7 +9,7 @@ def test_gemini_client_init(mock_configure, mock_model):
     client = GeminiClient(api_key="test_key")
     
     mock_configure.assert_called_once_with(api_key="test_key")
-    mock_model.assert_called_once_with(model_name="gemini-pro")
+    mock_model.assert_called_once_with(model_name="gemini-2.0-flash")
 
 @patch('google.generativeai.GenerativeModel')
 @patch('google.generativeai.configure')
