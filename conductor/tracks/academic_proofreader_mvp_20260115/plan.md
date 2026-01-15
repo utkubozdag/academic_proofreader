@@ -23,10 +23,10 @@
 - [x] Task: Design and implement the proofreading prompt for academic feedback [89d3e69]
     - [x] Write tests for prompt generation
     - [x] Implement prompt logic incorporating academic guidelines
-- [ ] Task: Implement logic to parse Gemini Pro response into structured feedback
-    - [~] Write tests for parsing various response formats
-    - [ ] Implement robust parsing logic
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Gemini Pro Integration' (Protocol in workflow.md)
+- [x] Task: Implement logic to parse Gemini Pro response into structured feedback [6417ea5]
+    - [x] Write tests for parsing various response formats
+    - [x] Implement robust parsing logic
+- [~] Task: Conductor - User Manual Verification 'Phase 3: Gemini Pro Integration' (Protocol in workflow.md)
 
 ## Phase 4: Core Logic & Report Generation
 - [ ] Task: Orchestrate the proofreading flow (Read -> Analyze -> Comment -> Write)
