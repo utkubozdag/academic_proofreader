@@ -19,7 +19,7 @@ def test_cli_arguments():
                         with patch('builtins.open', mock_open()) as mock_file:
                             main()
                             
-                            mock_orchestrate.assert_called_once_with('input.docx', 'out.docx', 'fake_key')
+                            mock_orchestrate.assert_called_once_with('input.docx', 'out.docx', 'fake_key', 'gemini-2.0-flash')
                             mock_report.assert_called_once()
                             mock_file.assert_called_with('report.md', 'w')
                             mock_file().write.assert_called_with("Mock Report Content")

@@ -36,11 +36,11 @@ def test_orchestrate(mock_parse, mock_prompt, mock_client_cls, mock_processor_cl
         ]
     )
     
-    summary, issues = orchestrate("input.docx", "output.docx", "api_key")
+    summary, issues = orchestrate("input.docx", "output.docx", "api_key", "gemini-2.0-flash")
     
     # Verify flow
     mock_processor_cls.assert_called_once_with("input.docx")
-    mock_client_cls.assert_called_once_with("api_key")
+    mock_client_cls.assert_called_once_with("api_key", model_name="gemini-2.0-flash")
     mock_processor.get_text.assert_called_once()
     mock_prompt.assert_called_once_with("Paragraph 1\nParagraph 2")
     mock_client.generate.assert_called_once_with("Full Prompt")

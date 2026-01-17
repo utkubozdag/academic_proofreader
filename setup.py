@@ -6,12 +6,12 @@ setup(
     packages=find_packages(),
     install_requires=[
         "python-docx",
-        "google-generativeai",
+        "google-genai",
         "python-dotenv",
     ],
     entry_points={
         "console_scripts": [
-            "proofread=academic_proofreader.cli:main",
+            "proofreader=academic_proofreader.cli:main",
         ],
     },
 )

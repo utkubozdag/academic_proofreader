@@ -12,6 +12,7 @@ def main():
     parser.add_argument("input_file", help="Path to the input .docx file")
     parser.add_argument("--output", "-o", default="output.docx", help="Path to save the proofread .docx file")
     parser.add_argument("--report", "-r", default="report.md", help="Path to save the summary report")
+    parser.add_argument("--model", "-m", default="gemini-2.0-flash", help="Gemini model name (default: gemini-2.0-flash)")
     
     args = parser.parse_args()
     
@@ -26,7 +27,7 @@ def main():
         sys.exit(1)
         
     try:
-        summary, issues = orchestrate(args.input_file, args.output, api_key)
+        summary, issues = orchestrate(args.input_file, args.output, api_key, args.model)
         
         # Generate and save report
         report_content = generate_report(summary, issues)

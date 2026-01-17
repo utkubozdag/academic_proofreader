@@ -7,7 +7,7 @@ from academic_proofreader.utils.logger import setup_logging
 
 logger = setup_logging()
 
-def orchestrate(input_path, output_path, api_key):
+def orchestrate(input_path, output_path, api_key, model_name="gemini-2.0-flash"):
     """
     Orchestrate the full proofreading flow.
     
@@ -15,12 +15,14 @@ def orchestrate(input_path, output_path, api_key):
         input_path (str): Path to the input .docx file.
         output_path (str): Path to save the proofread .docx file.
         api_key (str): Google AI API key.
+        model_name (str): Name of the Gemini model to use.
     """
     logger.info(f"Starting proofreading for {input_path}")
+    logger.info(f"Using model: {model_name}")
     
     # 1. Initialize components
     processor = WordProcessor(input_path)
-    client = GeminiClient(api_key)
+    client = GeminiClient(api_key, model_name=model_name)
     
     # 2. Extract text and generate prompt
     text = processor.get_text()
