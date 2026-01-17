@@ -9,7 +9,7 @@
 - **python-dotenv:** To manage environment variables and configuration from a `.env` file.
 
 ## AI Model
-- **Gemini Pro:** Utilized for all natural language processing tasks, including error detection, correction, stylistic analysis, and generating the summary report.
+- **Gemini 2.5 Pro:** Utilized for all natural language processing tasks, including error detection, correction, stylistic analysis, and generating the summary report.
 
 ## Configuration & Secrets
 - **Environment Variables (.env):** API keys and other sensitive configurations will be stored in a local `.env` file. This file will be excluded from version control to ensure security.
