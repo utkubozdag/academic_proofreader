@@ -159,6 +159,7 @@ class WordProcessor:
                 if original_text in run.text:
                     # Found the text - now we need to handle it
                     run_element = run._r
+                    para_element = paragraph._p
                     
                     # Split the run text if original_text is a substring
                     full_text = run.text
@@ -168,28 +169,39 @@ class WordProcessor:
                     before_text = full_text[:start_idx]
                     after_text = full_text[end_idx:]
                     
-                    # Clear the current run's text
-                    for t_elem in run_element.findall(qn('w:t')):
-                        run_element.remove(t_elem)
+                    # Get run properties to copy to new runs
+                    rPr = run_element.find(qn('w:rPr'))
+                    rPr_copy = etree.tostring(rPr) if rPr is not None else None
                     
-                    # Add text before the change (if any)
+                    # Find the position of this run in the paragraph
+                    run_index = list(para_element).index(run_element)
+                    
+                    # Remove the original run
+                    para_element.remove(run_element)
+                    
+                    insert_position = run_index
+                    
+                    # 1. Add run with text before the change (if any)
                     if before_text:
+                        before_run = OxmlElement('w:r')
+                        if rPr_copy:
+                            before_run.append(etree.fromstring(rPr_copy))
                         t_before = OxmlElement('w:t')
                         t_before.text = before_text
                         t_before.set('{http://www.w3.org/XML/1998/namespace}space', 'preserve')
-                        run_element.append(t_before)
+                        before_run.append(t_before)
+                        para_element.insert(insert_position, before_run)
+                        insert_position += 1
                     
-                    # Create w:del element for original text
+                    # 2. Create w:del element for original text (at paragraph level)
                     del_elem = OxmlElement('w:del')
                     del_elem.set(qn('w:id'), rev_id)
                     del_elem.set(qn('w:author'), author)
                     del_elem.set(qn('w:date'), date_str)
                     
                     del_run = OxmlElement('w:r')
-                    # Copy run properties if they exist
-                    rPr = run_element.find(qn('w:rPr'))
-                    if rPr is not None:
-                        del_run.append(etree.fromstring(etree.tostring(rPr)))
+                    if rPr_copy:
+                        del_run.append(etree.fromstring(rPr_copy))
                     
                     del_text = OxmlElement('w:delText')
                     del_text.text = original_text
@@ -197,15 +209,18 @@ class WordProcessor:
                     del_run.append(del_text)
                     del_elem.append(del_run)
                     
-                    # Create w:ins element for replacement text
+                    para_element.insert(insert_position, del_elem)
+                    insert_position += 1
+                    
+                    # 3. Create w:ins element for replacement text (at paragraph level)
                     ins_elem = OxmlElement('w:ins')
                     ins_elem.set(qn('w:id'), str(int(rev_id) + 1))
                     ins_elem.set(qn('w:author'), author)
                     ins_elem.set(qn('w:date'), date_str)
                     
                     ins_run = OxmlElement('w:r')
-                    if rPr is not None:
-                        ins_run.append(etree.fromstring(etree.tostring(rPr)))
+                    if rPr_copy:
+                        ins_run.append(etree.fromstring(rPr_copy))
                     
                     ins_text = OxmlElement('w:t')
                     ins_text.text = replacement_text
@@ -213,20 +228,24 @@ class WordProcessor:
                     ins_run.append(ins_text)
                     ins_elem.append(ins_run)
                     
-                    # Insert the del and ins elements
-                    run_element.append(del_elem)
-                    run_element.append(ins_elem)
+                    para_element.insert(insert_position, ins_elem)
+                    insert_position += 1
                     
-                    # Add text after the change (if any)
+                    # 4. Add run with text after the change (if any)
                     if after_text:
+                        after_run = OxmlElement('w:r')
+                        if rPr_copy:
+                            after_run.append(etree.fromstring(rPr_copy))
                         t_after = OxmlElement('w:t')
                         t_after.text = after_text
                         t_after.set('{http://www.w3.org/XML/1998/namespace}space', 'preserve')
-                        run_element.append(t_after)
+                        after_run.append(t_after)
+                        para_element.insert(insert_position, after_run)
                     
                     return True
         
         return False
+
 
     def enable_track_revisions(self):
         """
