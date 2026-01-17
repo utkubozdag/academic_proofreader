@@ -26,10 +26,10 @@ def main():
         sys.exit(1)
         
     try:
-        issues = orchestrate(args.input_file, args.output, api_key)
+        summary, issues = orchestrate(args.input_file, args.output, api_key)
         
         # Generate and save report
-        report_content = generate_report(issues)
+        report_content = generate_report(summary, issues)
         with open(args.report, "w") as f:
             f.write(report_content)
             

@@ -9,7 +9,7 @@ def parse_feedback(raw_response):
         raw_response (str): The raw string response from the model.
         
     Returns:
-        list: A list of issue dictionaries.
+        tuple: (summary dict, list of issue dicts)
         
     Raises:
         ValueError: If the response cannot be parsed as JSON.
@@ -19,7 +19,10 @@ def parse_feedback(raw_response):
     
     try:
         data = json.loads(cleaned_response)
-        return data.get("issues", [])
+        summary = data.get("summary", {})
+        issues = data.get("issues", [])
+        return summary, issues
     except json.JSONDecodeError as e:
         raise ValueError(f"Failed to parse Gemini response as JSON: {e}\nRaw: {raw_response}")
+
 

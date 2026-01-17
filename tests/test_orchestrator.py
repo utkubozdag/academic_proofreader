@@ -23,17 +23,20 @@ def test_orchestrate(mock_parse, mock_prompt, mock_client_cls, mock_processor_cl
     
     mock_prompt.return_value = "Full Prompt"
     
-    # Simulate finding one issue in the first paragraph
-    mock_parse.return_value = [
-        {
-            "original": "Paragraph 1",
-            "replacement": "Better Paragraph 1",
-            "explanation": "Fixed.",
-            "category": "Grammar"
-        }
-    ]
+    # Simulate finding one issue in the first paragraph (now returns tuple)
+    mock_parse.return_value = (
+        {"overall_assessment": "Good document"},
+        [
+            {
+                "original": "Paragraph 1",
+                "replacement": "Better Paragraph 1",
+                "explanation": "Fixed.",
+                "category": "Grammar"
+            }
+        ]
+    )
     
-    orchestrate("input.docx", "output.docx", "api_key")
+    summary, issues = orchestrate("input.docx", "output.docx", "api_key")
     
     # Verify flow
     mock_processor_cls.assert_called_once_with("input.docx")

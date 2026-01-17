@@ -8,7 +8,7 @@ def test_cli_arguments():
     with patch('sys.argv', ['proofread', 'input.docx', '--output', 'out.docx', '--report', 'report.md']):
         with patch('academic_proofreader.cli.orchestrate') as mock_orchestrate:
             with patch('academic_proofreader.cli.generate_report') as mock_report:
-                mock_orchestrate.return_value = []
+                mock_orchestrate.return_value = ({}, [])  # (summary, issues) tuple
                 mock_report.return_value = "Mock Report Content"
                 
                 # Mock config loading

@@ -31,7 +31,7 @@ def orchestrate(input_path, output_path, api_key):
     raw_response = client.generate(prompt)
     
     # 4. Parse feedback
-    issues = parse_feedback(raw_response)
+    summary, issues = parse_feedback(raw_response)
     logger.info(f"Found {len(issues)} issues.")
     
     # 5. Apply tracked changes (revisions)
@@ -56,4 +56,5 @@ def orchestrate(input_path, output_path, api_key):
     processor.save(output_path)
     logger.info(f"Saved proofread document to {output_path}")
     
-    return issues # Return issues for report generation later
+    return summary, issues  # Return both for report generation
+
