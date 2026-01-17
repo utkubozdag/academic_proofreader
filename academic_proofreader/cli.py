@@ -3,7 +3,7 @@ import os
 import sys
 from academic_proofreader.config import load_config
 from academic_proofreader.orchestrator import orchestrate
-from academic_proofreader.reporter import generate_report
+from academic_proofreader.reporter import generate_report, save_report
 from academic_proofreader.utils.logger import setup_logging
 
 def main():
@@ -11,7 +11,7 @@ def main():
     parser = argparse.ArgumentParser(description="AI-powered Academic Proofreader")
     parser.add_argument("input_file", help="Path to the input .docx file")
     parser.add_argument("--output", "-o", default="output.docx", help="Path to save the proofread .docx file")
-    parser.add_argument("--report", "-r", default="report.md", help="Path to save the summary report")
+    parser.add_argument("--report", "-r", default="report.docx", help="Path to save the summary report (.docx)")
     parser.add_argument("--model", "-m", default="gemini-2.0-flash", help="Gemini model name (default: gemini-2.0-flash)")
     
     args = parser.parse_args()
@@ -30,9 +30,8 @@ def main():
         summary, issues = orchestrate(args.input_file, args.output, api_key, args.model)
         
         # Generate and save report
-        report_content = generate_report(summary, issues)
-        with open(args.report, "w") as f:
-            f.write(report_content)
+        report_doc = generate_report(summary, issues)
+        save_report(report_doc, args.report)
             
         logger.info(f"Summary report saved to {args.report}")
         logger.info("Proofreading complete!")
@@ -43,3 +42,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

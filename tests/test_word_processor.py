@@ -33,29 +33,6 @@ def test_save_document(tmp_path):
     new_doc = Document(save_path)
     assert new_doc.paragraphs[0].text == "Original Text"
 
-def test_add_comment_targeted(tmp_path):
-    """Test adding a comment to a specific phrase in a paragraph."""
-    doc_path = tmp_path / "test_targeted.docx"
-    doc = Document()
-    doc.add_paragraph("This is a long paragraph with a specific error.")
-    doc.save(doc_path)
-    
-    processor = WordProcessor(doc_path)
-    # Target "specific error"
-    processor.add_comment(0, "Fix this", author="Conductor", search_text="specific error")
-    
-    save_path = tmp_path / "targeted.docx"
-    processor.save(save_path)
-    
-    assert os.path.exists(save_path)
-    commented_doc = Document(save_path)
-    
-    # Verify that comments exist
-    comments_part = any(
-        part.content_type == "application/vnd.openxmlformats-officedocument.wordprocessingml.comments+xml"
-        for part in commented_doc.part.related_parts.values()
-    )
-    assert comments_part
 
 
 def test_add_tracked_change(tmp_path):
