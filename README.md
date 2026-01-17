@@ -13,8 +13,8 @@ AI-powered proofreading for academic documents. Uses Google Gemini to analyze yo
 
 ```bash
 # Clone and install
-git clone https://github.com/yourusername/academic-proofreader.git
-cd academic-proofreader
+git clone https://github.com/utkubozdag/academic_proofreader.git
+cd academic_proofreader
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -e .
