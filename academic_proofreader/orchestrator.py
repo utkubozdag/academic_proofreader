@@ -34,19 +34,25 @@ def orchestrate(input_path, output_path, api_key):
     issues = parse_feedback(raw_response)
     logger.info(f"Found {len(issues)} issues.")
     
-    # 5. Inject comments
-    # Simple mapping: find paragraph index by matching text
+    # 5. Apply tracked changes (revisions)
+    applied_count = 0
     for issue in issues:
         original = issue.get("original")
-        comment_text = f"Suggested: {issue.get('replacement')}\n\n{issue.get('explanation')}"
+        replacement = issue.get("replacement")
         
-        # Find the paragraph
-        for i, para in enumerate(processor.doc.paragraphs):
-            if original in para.text:
-                processor.add_comment(i, comment_text, author="Academic Proofreader", search_text=original)
-                break
+        if original and replacement:
+            if processor.add_tracked_change(original, replacement, author="Academic Proofreader"):
+                applied_count += 1
+                logger.debug(f"Applied change: '{original}' -> '{replacement}'")
+            else:
+                logger.warning(f"Could not find text to change: '{original}'")
     
-    # 6. Save document
+    logger.info(f"Applied {applied_count} of {len(issues)} tracked changes.")
+    
+    # 6. Enable track revisions mode so Word shows the changes
+    processor.enable_track_revisions()
+    
+    # 7. Save document
     processor.save(output_path)
     logger.info(f"Saved proofread document to {output_path}")
     

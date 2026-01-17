@@ -43,6 +43,8 @@ def test_orchestrate(mock_parse, mock_prompt, mock_client_cls, mock_processor_cl
     mock_client.generate.assert_called_once_with("Full Prompt")
     mock_parse.assert_called_once_with("Gemini Response")
     
-    # Verify comment injection (one issue found)
-    mock_processor.add_comment.assert_called_once()
+    # Verify tracked change injection (one issue found)
+    mock_processor.add_tracked_change.assert_called_once()
+    mock_processor.enable_track_revisions.assert_called_once()
     mock_processor.save.assert_called_once_with("output.docx")
+
